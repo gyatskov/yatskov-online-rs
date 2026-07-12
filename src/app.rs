@@ -1,7 +1,6 @@
 #[derive(serde::Deserialize, serde::Serialize)]
 #[serde(default)] // if we add new fields, give them default values when deserializing old state
 pub struct YatskovOnlineApp {
-    // Example stuff:
     label: String,
 
     #[serde(skip)] // This how you opt-out of serialization of a field
@@ -28,12 +27,33 @@ impl YatskovOnlineApp {
 }
 
 impl eframe::App for YatskovOnlineApp {
+    fn save(&mut self, storage: &mut dyn eframe::Storage) {
+        eframe::set_value(storage, eframe::APP_KEY, self);
+    }
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
+        egui::Panel::top("top_panel").show(ui, |ui| {
+            let is_web = cfg!(target_arch = "wasm32");
+            if !is_web {
+                ui.menu_button("File", |ui| {
+                    if ui.button("Quit").clicked() {
+                        ui.send_viewport_cmd(egui::ViewportCommand::Close);
+                    }
+                });
+                ui.add_space(16.0);
+            }
+
+            egui::widgets::global_theme_preference_buttons(ui);
+        });
+
         egui::CentralPanel::default().show(ui, |ui| {
             ui.heading("Yatskov Online");
             ui.add_space(4.0);
 
             ui.separator();
+
+            ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
+                egui::warn_if_debug_build(ui);
+            });
         });
     }
 }
