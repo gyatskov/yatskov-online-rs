@@ -34,7 +34,6 @@ impl eframe::App for YatskovOnlineApp {
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         egui::Panel::top("top_panel")
             .resizable(false)
-            .min_size(160.)
             .show(ui, |ui| {
                 let is_web = cfg!(target_arch = "wasm32");
                 if !is_web {
