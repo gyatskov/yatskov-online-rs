@@ -1,4 +1,4 @@
-use egui::{Color32, Visuals};
+use egui::{Color32, Stroke, Visuals, style::{WidgetVisuals, Widgets}};
 
 #[derive(serde::Deserialize, serde::Serialize)]
 #[serde(default)] // if we add new fields, give them default values when deserializing old state
@@ -65,10 +65,38 @@ impl eframe::App for YatskovOnlineApp {
         //     expansion: 0.0,
         //     ..ui.visuals().widgets.noninteractive
         // };
+        //
+        // font color: #422903
         // TODO: Extract to struct
         ui.set_visuals_of(egui::Theme::Dark, Visuals {
-            panel_fill: Color32::from_rgb(0x40, 0x40, 0x40),
-            window_fill: Color32::from_rgb(0x30, 0x30, 0x30),
+            panel_fill: Color32::from_hex("#2F665D").unwrap(),
+            window_fill: Color32::from_hex("#28544C").unwrap(),
+            widgets: Widgets {
+                noninteractive: WidgetVisuals {
+                    fg_stroke: Stroke {color: Color32::from_hex("#FFFEFF").unwrap(), ..Default::default()},
+                    bg_fill: Color32::from_hex("#28544C").unwrap(), 
+                    weak_bg_fill: Color32::from_hex("#2F665D").unwrap(), 
+                    ..ui.visuals().widgets.noninteractive
+                },
+                inactive: WidgetVisuals {
+                    bg_fill: Color32::from_hex("#28544C").unwrap(), 
+                    bg_stroke: Stroke {width: 1., color: Color32::from_hex("#28544C").unwrap()},
+                    weak_bg_fill: Color32::from_hex("#2F665D").unwrap(), 
+                    ..ui.visuals().widgets.inactive
+                },
+                hovered: WidgetVisuals {
+                    bg_fill: Color32::from_hex("#B29F23").unwrap(), 
+                    bg_stroke: Stroke {width: 1., color: Color32::from_hex("#B29F33").unwrap()},
+                    ..ui.visuals().widgets.inactive
+                },
+                active: WidgetVisuals {
+                    fg_stroke: Stroke {color: Color32::from_hex("#422903").unwrap(), ..Default::default()},
+                    bg_fill: Color32::from_hex("#1E4280").unwrap(), 
+                    bg_stroke: Stroke {width: 1., color: Color32::from_hex("#1E4290").unwrap()},
+                    ..ui.visuals().widgets.inactive
+                },
+                ..Default::default()
+            }, 
             ..Default::default()
         });
 
