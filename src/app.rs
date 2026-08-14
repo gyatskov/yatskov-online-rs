@@ -1,5 +1,4 @@
-use crate::theme::Theme;
-use egui::{Color32, Visuals, style::WidgetVisuals};
+use egui::{Color32, Visuals};
 
 #[derive(serde::Deserialize, serde::Serialize)]
 #[serde(default)] // if we add new fields, give them default values when deserializing old state
@@ -8,8 +7,6 @@ pub struct YatskovOnlineApp {
 
     #[serde(skip)] // This how you opt-out of serialization of a field
     value: f32,
-
-    theme: Theme,
 }
 
 impl Default for YatskovOnlineApp {
@@ -17,12 +14,6 @@ impl Default for YatskovOnlineApp {
         Self {
             label: "Yatskov Online".to_owned(),
             value: 2.7,
-            theme: Theme {
-                bg_primary: Color32::from_rgb(0x00, 0x00, 0x00),
-                text_primary: Color32::from_rgb(0x30, 0x30, 0x30),
-                text_secondary: Color32::from_rgb(0x50, 0x50, 0x50),
-                ..Theme::default()
-            },
         }
     }
 }
@@ -43,40 +34,38 @@ impl eframe::App for YatskovOnlineApp {
     }
 
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
-        let ctx = ui.ctx().clone();
-        self.theme.render_background(&ctx);
-
         // Theme customization
-        ui.visuals_mut().widgets.noninteractive = WidgetVisuals {
-            weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
-            bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
-            expansion: 0.0,
-            ..ui.visuals().widgets.noninteractive
-        };
-        ui.visuals_mut().widgets.inactive = WidgetVisuals {
-            weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
-            bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
-            expansion: 0.0,
-            ..ui.visuals().widgets.noninteractive
-        };
-        ui.visuals_mut().widgets.hovered = WidgetVisuals {
-            weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
-            bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
-            expansion: 0.0,
-            ..ui.visuals().widgets.noninteractive
-        };
-        ui.visuals_mut().widgets.active = WidgetVisuals {
-            weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
-            bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
-            expansion: 0.0,
-            ..ui.visuals().widgets.noninteractive
-        };
-        ui.visuals_mut().widgets.open = WidgetVisuals {
-            weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
-            bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
-            expansion: 0.0,
-            ..ui.visuals().widgets.noninteractive
-        };
+        // ui.visuals_mut().widgets.noninteractive = WidgetVisuals {
+        //     weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
+        //     bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
+        //     expansion: 0.0,
+        //     ..ui.visuals().widgets.noninteractive
+        // };
+        // ui.visuals_mut().widgets.inactive = WidgetVisuals {
+        //     weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
+        //     bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
+        //     expansion: 0.0,
+        //     ..ui.visuals().widgets.noninteractive
+        // };
+        // ui.visuals_mut().widgets.hovered = WidgetVisuals {
+        //     weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
+        //     bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
+        //     expansion: 0.0,
+        //     ..ui.visuals().widgets.noninteractive
+        // };
+        // ui.visuals_mut().widgets.active = WidgetVisuals {
+        //     weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
+        //     bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
+        //     expansion: 0.0,
+        //     ..ui.visuals().widgets.noninteractive
+        // };
+        // ui.visuals_mut().widgets.open = WidgetVisuals {
+        //     weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
+        //     bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
+        //     expansion: 0.0,
+        //     ..ui.visuals().widgets.noninteractive
+        // };
+        // TODO: Extract to struct
         ui.set_visuals_of(egui::Theme::Dark, Visuals {
             panel_fill: Color32::from_rgb(0x40, 0x40, 0x40),
             window_fill: Color32::from_rgb(0x30, 0x30, 0x30),
