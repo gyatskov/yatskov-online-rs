@@ -35,38 +35,6 @@ impl eframe::App for YatskovOnlineApp {
 
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         // Theme customization
-        // ui.visuals_mut().widgets.noninteractive = WidgetVisuals {
-        //     weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
-        //     bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
-        //     expansion: 0.0,
-        //     ..ui.visuals().widgets.noninteractive
-        // };
-        // ui.visuals_mut().widgets.inactive = WidgetVisuals {
-        //     weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
-        //     bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
-        //     expansion: 0.0,
-        //     ..ui.visuals().widgets.noninteractive
-        // };
-        // ui.visuals_mut().widgets.hovered = WidgetVisuals {
-        //     weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
-        //     bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
-        //     expansion: 0.0,
-        //     ..ui.visuals().widgets.noninteractive
-        // };
-        // ui.visuals_mut().widgets.active = WidgetVisuals {
-        //     weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
-        //     bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
-        //     expansion: 0.0,
-        //     ..ui.visuals().widgets.noninteractive
-        // };
-        // ui.visuals_mut().widgets.open = WidgetVisuals {
-        //     weak_bg_fill: Color32::from_rgb(0x30, 0x30, 0x30),
-        //     bg_fill: Color32::from_rgb(0x40, 0x40, 0x40),
-        //     expansion: 0.0,
-        //     ..ui.visuals().widgets.noninteractive
-        // };
-        //
-        // font color: #422903
         // TODO: Extract to struct
         ui.set_visuals_of(egui::Theme::Dark, Visuals {
             panel_fill: Color32::from_hex("#2F665D").unwrap(),
